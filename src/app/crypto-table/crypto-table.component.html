@@ -10,7 +10,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let crypto of top100Cryptos">
+        <tr *ngFor="let crypto of top100Cryptos"
+         [class.negative]="crypto.percent_change_24h < 0"
+         [class.positive]="crypto.percent_change_24h >= 0">
             <td class="borderWhiteAll" [innerHTML]="crypto.rank"></td>
             <td class="borderWhiteAll" [innerHTML]="crypto.name"></td>
             <td class="borderWhiteAll" [innerHTML]="crypto.market_cap_usd | currency"></td>
