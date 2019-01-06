@@ -11,7 +11,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: CryptoTableComponent },
-  { path: 'bitcoinStats', component: BitcoinStatsComponent },
+  { path: 'bitcoin-stats', component: BitcoinStatsComponent },
   { path: '**', component: NotFoundComponent}
 ];
 
