@@ -1,0 +1,22 @@
+<table class="table table-dark table-striped table-hover borderWhiteAll">
+    <thead>
+        <tr>
+            <th class="borderWhiteAll">#</th>
+            <th class="borderWhiteAll">Name</th>
+            <th class="borderWhiteAll">Market Cap (USD)</th>
+            <th class="borderWhiteAll">Price (USD)</th>
+            <th class="borderWhiteAll">Volume (24h)</th>
+            <th class="borderWhiteAll">Change (24h)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let crypto of top100Cryptos">
+            <td class="borderWhiteAll" [innerHTML]="crypto.rank"></td>
+            <td class="borderWhiteAll" [innerHTML]="crypto.name"></td>
+            <td class="borderWhiteAll" [innerHTML]="crypto.market_cap_usd | currency"></td>
+            <td class="borderWhiteAll" [innerHTML]="crypto.price_usd | currency"></td>
+            <td class="borderWhiteAll" [innerHTML]="crypto.available_supply"></td>
+            <td class="borderWhiteAll" [innerHTML]="crypto.percent_change_24h * .01 | percent: '1.1-2'"></td>
+        </tr>
+    </tbody>
+</table>
