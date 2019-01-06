@@ -1,12 +1,12 @@
 <table class="table table-dark table-striped table-hover borderWhiteAll">
     <thead>
         <tr>
-            <th class="borderWhiteAll">#</th>
-            <th class="borderWhiteAll">Name</th>
-            <th class="borderWhiteAll">Market Cap (USD)</th>
-            <th class="borderWhiteAll">Price (USD)</th>
-            <th class="borderWhiteAll">Volume (24h)</th>
-            <th class="borderWhiteAll">Change (24h)</th>
+            <th class="borderWhiteAll clickHand" (click)="sortNumeric(sortValues.rank,'rank'); sortValues.rank = !sortValues.rank">#</th>
+            <th class="borderWhiteAll clickHand" (click)="sortString(sortValues.name); sortValues.name = !sortValues.name">Name</th>
+            <th class="borderWhiteAll clickHand" (click)="sortNumeric(sortValues.market_cap_usd,'market_cap_usd'); sortValues.market_cap_usd = !sortValues.market_cap_usd">Market Cap (USD)</th>
+            <th class="borderWhiteAll clickHand" (click)="sortNumeric(sortValues.price_usd,'price_usd'); sortValues.price_usd = !sortValues.price_usd">Price (USD)</th>
+            <th class="borderWhiteAll clickHand" (click)="sortNumeric(sortValues.available_supply, 'available_supply'); sortValues.available_supply = !sortValues.available_supply">Volume (24h)</th>
+            <th class="borderWhiteAll clickHand" (click)="sortNumeric(sortValues.percent_change_24h, 'percent_change_24h'); sortValues.percent_change_24h = !sortValues.percent_change_24h">Change (24h)</th>
         </tr>
     </thead>
     <tbody>

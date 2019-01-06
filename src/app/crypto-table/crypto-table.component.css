@@ -4,3 +4,6 @@
 .negative {
     color: #ff0101;
 }
+.clickHand {
+    cursor: pointer;
+}
