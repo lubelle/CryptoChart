@@ -11,6 +11,7 @@ import { BitcoinPrice } from 'src/models/bitcoin-price.class';
 export class BitcoinStatsComponent implements OnInit {
   bitcoinStats: BitcoinPrice = new BitcoinPrice();
   prices: number[];
+  dates: string[];
 
   constructor(public cryptoService: CryptoService) { }
 
@@ -22,8 +23,22 @@ export class BitcoinStatsComponent implements OnInit {
     this.cryptoService.getBitcoinPriceStats().subscribe((data: any) => {
       this.bitcoinStats = new BitcoinPrice(data);
       this.prices = this.convertPrices();
-      console.log(this.prices);
+      this.dates = this.convertDates();
+      console.log(this.dates);
     });
+  }
+
+  // Here values returned from api are already sorted. If not, sort the string[] first then format
+  // getMonth() function is zero indexed based
+  // getDay: Day of the week (0-6) starting in sunday.
+  // getTime: Number of milliseconds since January 1, 1970.
+  convertDates(): string[] {
+    const dates = this.bitcoinStats.values.map((coordinates: PriceCoordinates) => {
+      const rawDate = new Date(coordinates.x * 1000);
+
+      return `${rawDate.getMonth() + 1}/${rawDate.getDate()}/${rawDate.getFullYear()}`;
+    });
+    return dates;
   }
 
   public convertPrices(): number[] {
