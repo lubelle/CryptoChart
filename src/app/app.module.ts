@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ChartModule } from 'angular2-chartjs';
+
 import { AppComponent } from './app.component';
 import { CryptoService } from 'src/services/crypto.service';
 import { CryptoTableComponent } from './crypto-table/crypto-table.component';
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ChartModule
   ],
   providers: [CryptoService],
   bootstrap: [AppComponent]
