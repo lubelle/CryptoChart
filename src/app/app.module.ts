@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { ChartModule } from 'angular2-chartjs';
 
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    ChartModule
+    ChartModule,
+    FormsModule
   ],
   providers: [CryptoService],
   bootstrap: [AppComponent]

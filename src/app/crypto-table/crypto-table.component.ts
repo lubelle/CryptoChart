@@ -12,7 +12,7 @@ export class CryptoTableComponent {
     isToggle = false;
     public top100Cryptos: CryptoCurrency[];
     public sortValues: any = { rank: false, market_cap_usd: true, available_supply: false,
-        percent_change_24h: false, price_usd: false, name: false};
+                               percent_change_24h: false, price_usd: false, name: false};
     constructor(public cryptoService: CryptoService) {
         this.getTop100Cryptos();
     }
@@ -22,7 +22,6 @@ export class CryptoTableComponent {
             this.top100Cryptos = data.map((ticker: any) => {
                 return new CryptoCurrency(ticker);
             });
-            console.log(this.top100Cryptos);
         });
     }
     sortString(sortValue: boolean, key?: string): void {

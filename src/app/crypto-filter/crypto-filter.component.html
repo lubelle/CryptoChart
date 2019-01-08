@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-4">
                 <label for="growth" class="font-weight-bold">Show Growth</label>
-                <select id="growth" class="form-control">
+                <select id="growth" class="form-control" [(ngModel)]="percentChange" (ngModelChange)="percentChangeFilter()">
                     <option value="All">All</option>
                     <option value="Positive">Positive</option>
                     <option value="Negative">Negative</option>
