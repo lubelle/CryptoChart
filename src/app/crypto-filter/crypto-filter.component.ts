@@ -1,8 +1,6 @@
-import { Component, Input, Output } from '@angular/core';
-import { EventEmitter } from 'events';
+import { Component, Input } from '@angular/core';
 
 import { CryptoCurrency } from 'src/models/crypto-currency.class';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
     selector: 'app-crypto-filter',
@@ -13,9 +11,15 @@ export class CryptoFilterComponent {
     @Input() cryptos: CryptoCurrency[];
     filteredCryptos: CryptoCurrency[];
     percentChange = 'All';
+    showNumberOfCryptos = 100;
 
     // in the template: <select id="growth" class="form-control" [(ngModel)]="percentChange" (ngModelChange)="percentChangeFilter()">
     // the order of ngModel and ngModelChange matters
+
+    cryptosFilter(): void {
+        this.percentChangeFilter();
+        this.showOnlyFilter();
+    }
 
     percentChangeFilter(): void {
         this.filteredCryptos = this.cryptos.filter((crypto: CryptoCurrency) => {
@@ -28,4 +32,7 @@ export class CryptoFilterComponent {
         });
     }
 
+    showOnlyFilter(): void {
+        this.filteredCryptos = this.cryptos.slice(0, this.showNumberOfCryptos);
+    }
 }
