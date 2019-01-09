@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { Component } from '@angular/core';
 import { CryptoService } from 'src/services/crypto.service';
 import { CryptoCurrency } from 'src/models/crypto-currency.class';
@@ -9,19 +8,29 @@ import { CryptoCurrency } from 'src/models/crypto-currency.class';
     styleUrls: ['./crypto-table.component.css']
 })
 export class CryptoTableComponent {
-    isToggle = false;
     public top100Cryptos: CryptoCurrency[];
+    filteredCryptos: CryptoCurrency[];
+    priceUnit = 'USD';
     public sortValues: any = { rank: false, market_cap_usd: true, available_supply: false,
-                               percent_change_24h: false, price_usd: false, name: false};
+                               percent_change_24h: false, price_usd: false, price_btc: false, name: false};
     constructor(public cryptoService: CryptoService) {
         this.getTop100Cryptos();
     }
 
+    listenFilterCryptos(arr: CryptoCurrency[]) {
+        this.filteredCryptos = arr;
+    }
+
+    listenPriceUnit(e: string) {
+        this.priceUnit = e;
+        console.log(this.priceUnit);
+    }
     getTop100Cryptos(): void {
         this.cryptoService.getAllCryptos().subscribe( (data: any) => {
             this.top100Cryptos = data.map((ticker: any) => {
                 return new CryptoCurrency(ticker);
             });
+            this.filteredCryptos = this.top100Cryptos;
         });
     }
     sortString(sortValue: boolean, key?: string): void {

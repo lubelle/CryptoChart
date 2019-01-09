@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CryptoCurrency } from 'src/models/crypto-currency.class';
 
 @Component({
@@ -9,18 +8,23 @@ import { CryptoCurrency } from 'src/models/crypto-currency.class';
 })
 export class CryptoFilterComponent {
     @Input() cryptos: CryptoCurrency[];
+    @Output() filteredCryptosEvent = new EventEmitter<CryptoCurrency[]>();
+    @Output() priceUnitEvent = new EventEmitter<string>();
     filteredCryptos: CryptoCurrency[];
     percentChange = 'All';
     showNumberOfCryptos = 100;
+    priceUnit = 'USD';
+
+    filterEvent() {
+        this.filteredCryptosEvent.emit(this.filteredCryptos);
+    }
+
+    priceEvent() {
+        this.priceUnitEvent.emit(this.priceUnit);
+    }
 
     // in the template: <select id="growth" class="form-control" [(ngModel)]="percentChange" (ngModelChange)="percentChangeFilter()">
     // the order of ngModel and ngModelChange matters
-
-    cryptosFilter(): void {
-        this.percentChangeFilter();
-        this.showOnlyFilter();
-    }
-
     percentChangeFilter(): void {
         this.filteredCryptos = this.cryptos.filter((crypto: CryptoCurrency) => {
             if (this.percentChange === 'Positive') {
@@ -28,11 +32,23 @@ export class CryptoFilterComponent {
             } else if (this.percentChange === 'Negative') {
                 return crypto.percent_change_24h < 0;
             }
-            return this.cryptos;
+            return crypto;
         });
+        console.log(this.filteredCryptos);
     }
 
     showOnlyFilter(): void {
         this.filteredCryptos = this.cryptos.slice(0, this.showNumberOfCryptos);
+        console.log(this.filteredCryptos);
+
+        this.filterEvent();
+        this.priceEvent();
+
+    }
+
+    cryptosFilter(): void {
+        this.percentChangeFilter();
+        this.showOnlyFilter();
+
     }
 }

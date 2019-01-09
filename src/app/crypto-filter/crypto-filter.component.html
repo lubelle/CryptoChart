@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-4">
                 <label for="growth" class="font-weight-bold">Show Growth</label>
-                <select id="growth" class="form-control" [(ngModel)]="percentChange" (ngModelChange)="cryptosFilter()">
+                <select id="growth" class="form-control" [(ngModel)]="percentChange"  (ngModelChange)="cryptosFilter()" >
                     <option value="All">All</option>
                     <option value="Positive">Positive</option>
                     <option value="Negative">Negative</option>
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-4">
                 <label for="priceUnit" class="font-weight-bold">Price Unit</label>
-                <select id="priceUnit" class="form-control">
+                <select id="priceUnit" class="form-control" [(ngModel)]="priceUnit" (ngModelChange)="cryptosFilter()" >
                     <option value="USD">USD</option>
                     <option value="BTC">BTC</option>
                 </select>
