@@ -8,16 +8,19 @@ import { BitcoinMarket } from 'src/models/bitcoin-market.class';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   public bitcoinMarketCap: BitcoinMarket = new BitcoinMarket();
+
   constructor(public cryptoService: CryptoService) {
     this.getBitcoinStats();
   }
+
   public getBitcoinStats(): void {
+
     this.cryptoService.getBitcoinmarketCap().subscribe((data: any) => {
       this.bitcoinMarketCap = data;
-      console.log(this.bitcoinMarketCap);
-      console.log(data);
     });
+
   }
 
 }

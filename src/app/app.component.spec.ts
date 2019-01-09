@@ -1,27 +1,43 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+
+import { CryptoService } from 'src/services/crypto.service';
+import { BitcoinMarket } from 'src/models/bitcoin-market.class';
+
 describe('AppComponent', () => {
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      providers: [
+        CryptoService
+      ],
+      imports: [
+        HttpClientModule
+      ],
+      schemas: [NO_ERRORS_SCHEMA] // ignore the routeLink error in this case
     }).compileComponents();
   }));
+
   it('should create the app', async(() => {
+    // arrange
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
+
+    // no act in this case just assert
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'crypto'`, async(() => {
+
+  it('instance of BitcoinMarket', async(() => {
+    // arrange
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('crypto');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to crypto!');
+
+    // assert
+    expect(app.bitcoinMarketCap instanceof BitcoinMarket).toBe(true);
   }));
 });
