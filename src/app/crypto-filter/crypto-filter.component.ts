@@ -10,7 +10,7 @@ export class CryptoFilterComponent {
     @Input() cryptos: CryptoCurrency[];
     @Output() filteredCryptosEvent = new EventEmitter<CryptoCurrency[]>();
     @Output() priceUnitEvent = new EventEmitter<string>();
-    filteredCryptos: CryptoCurrency[];
+    filteredCryptos: CryptoCurrency[] = [];
     percentChange = 'All';
     showNumberOfCryptos = 100;
     priceUnit = 'USD';
@@ -34,16 +34,13 @@ export class CryptoFilterComponent {
             }
             return crypto;
         });
-        console.log(this.filteredCryptos);
     }
 
     showOnlyFilter(): void {
-        this.filteredCryptos = this.cryptos.slice(0, this.showNumberOfCryptos);
-        console.log(this.filteredCryptos);
+        this.filteredCryptos = this.filteredCryptos.slice(0, this.showNumberOfCryptos);
 
         this.filterEvent();
         this.priceEvent();
-
     }
 
     cryptosFilter(): void {
