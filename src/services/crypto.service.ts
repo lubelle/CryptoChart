@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BitcoinMarket } from 'src/models/bitcoin-market.class';
-import { CryptoCurrency } from 'src/models/crypto-currency.class';
+import { BitcoinMarket, BitcoinPrice, CryptoCurrency } from 'src/models';
 
 @Injectable()
 export class CryptoService {
@@ -18,11 +17,21 @@ export class CryptoService {
         }));
     }
 
-    public getAllCryptos() {
-        return this.http.get('https://api.coinmarketcap.com/v1/ticker/');
+    public getAllCryptos(): Observable<CryptoCurrency[]> {
+        return this.http.get('https://api.coinmarketcap.com/v1/ticker/')
+        .pipe(
+            map((data: any) => {
+            return data.map((crypto: any) => {
+                return new CryptoCurrency(crypto);
+            });
+        }));
     }
 
-    public getBitcoinPriceStats() {
-        return this.http.get('https://api.blockchain.info/charts/market-price?cors=true&format=json&lang=en');
+    public getBitcoinPriceStats(): Observable <BitcoinPrice> {
+        return this.http.get('https://api.blockchain.info/charts/market-price?cors=true&format=json&lang=en')
+        .pipe(
+            map((data: any) => {
+                return new BitcoinPrice(data);
+            }));
     }
 }

@@ -26,10 +26,8 @@ export class CryptoTableComponent {
         console.log(this.priceUnit);
     }
     getTop100Cryptos(): void {
-        this.cryptoService.getAllCryptos().subscribe( (data: any) => {
-            this.top100Cryptos = data.map((ticker: any) => {
-                return new CryptoCurrency(ticker);
-            });
+        this.cryptoService.getAllCryptos().subscribe( (data: CryptoCurrency[]) => {
+            this.top100Cryptos = data;
             this.filteredCryptos = this.top100Cryptos;
         });
     }

@@ -17,7 +17,7 @@ export class AppComponent {
 
   public getBitcoinStats(): void {
 
-    this.cryptoService.getBitcoinmarketCap().subscribe((data: any) => {
+    this.cryptoService.getBitcoinmarketCap().subscribe((data: BitcoinMarket) => {
       this.bitcoinMarketCap = data;
     });
 

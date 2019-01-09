@@ -21,7 +21,7 @@ export class BitcoinStatsComponent implements OnInit {
   }
 
   public getYearlyBitcoinPrice() {
-    this.cryptoService.getBitcoinPriceStats().subscribe((data: any) => {
+    this.cryptoService.getBitcoinPriceStats().subscribe((data: BitcoinPrice) => {
       this.bitcoinStats = data;
       this.prices = this.convertPrices();
       this.dates = this.convertDates();
