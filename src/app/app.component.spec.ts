@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { CryptoService } from 'src/services/crypto.service';
-import { BitcoinMarket } from 'src/models/bitcoin-market.class';
+import { BitcoinMarket } from 'src/models';
 
 describe('AppComponent', () => {
 

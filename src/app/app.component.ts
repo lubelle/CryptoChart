@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CryptoService } from 'src/services/crypto.service';
-import { BitcoinMarket } from 'src/models/bitcoin-market.class';
+import { BitcoinMarket } from 'src/models';
 
 @Component({
   selector: 'app-root',

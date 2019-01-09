@@ -1,8 +1,8 @@
-import { CryptoCurrency } from 'src/models/crypto-currency.class';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
+import { CryptoCurrency } from 'src/models';
 import { CryptoFilterComponent } from './crypto-filter.component';
 import { CryptoService } from 'src/services/crypto.service';
 

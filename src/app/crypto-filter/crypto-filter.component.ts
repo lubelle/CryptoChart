@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
-import { CryptoCurrency } from 'src/models/crypto-currency.class';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CryptoCurrency } from 'src/models';
 
 @Component({
     selector: 'app-crypto-filter',

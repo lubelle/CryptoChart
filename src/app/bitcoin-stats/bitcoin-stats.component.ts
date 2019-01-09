@@ -1,7 +1,6 @@
-import { PriceCoordinates } from './../../models/price-coordinates.interface';
 import { Component, OnInit } from '@angular/core';
 import { CryptoService } from 'src/services/crypto.service';
-import { BitcoinPrice } from 'src/models/bitcoin-price.class';
+import { PriceCoordinates, BitcoinPrice } from 'src/models';
 
 @Component({
   selector: 'app-bitcoin-stats',
