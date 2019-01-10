@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
+import { AppComponent } from './app.component';
 import { CryptoService } from 'src/services/crypto.service';
 import { BitcoinMarket } from 'src/models';
 
