@@ -32,7 +32,6 @@ export class CryptoTableComponent implements OnInit, OnDestroy {
 
     listenPriceUnit(e: string) {
         this.priceUnit = e;
-        console.log(this.priceUnit);
     }
 
     getTop100Cryptos(): void {
@@ -43,7 +42,7 @@ export class CryptoTableComponent implements OnInit, OnDestroy {
     }
     sortString(sortTemplate: boolean, key?: string): void {
         if (sortTemplate) {
-            this.top100Cryptos = this.top100Cryptos.sort((a, b) => {
+            this.filteredCryptos = this.filteredCryptos.sort((a, b) => {
                 const nameA = a.name.toUpperCase();
                 const nameB = b.name.toUpperCase();
                 if (nameA < nameB) {
@@ -54,7 +53,7 @@ export class CryptoTableComponent implements OnInit, OnDestroy {
                 return 0;
             });
         } else {
-            this.top100Cryptos = this.top100Cryptos.sort((a, b) => {
+            this.filteredCryptos = this.filteredCryptos.sort((a, b) => {
                 const nameA = a.name.toUpperCase();
                 const nameB = b.name.toUpperCase();
                 if (nameA > nameB) {
@@ -66,13 +65,13 @@ export class CryptoTableComponent implements OnInit, OnDestroy {
             });
         }
     }
-    public sortNumeric(sortTemplate: string, key: string) {
+    public sortNumeric(sortTemplate: boolean, key: string) {
         if (sortTemplate) {
-            this.top100Cryptos = this.top100Cryptos.sort((a: CryptoCurrency, b: CryptoCurrency) => {
+            this.filteredCryptos = this.filteredCryptos.sort((a: CryptoCurrency, b: CryptoCurrency) => {
                 return a[key] - b[key];
             });
         } else {
-            this.top100Cryptos = this.top100Cryptos.sort((a: CryptoCurrency, b: CryptoCurrency) => {
+            this.filteredCryptos = this.filteredCryptos.sort((a: CryptoCurrency, b: CryptoCurrency) => {
                 return b[key] - a[key];
             });
         }
