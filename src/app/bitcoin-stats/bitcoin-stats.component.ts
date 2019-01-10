@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CryptoService } from 'src/services/crypto.service';
 import { PriceCoordinates, BitcoinPrice } from 'src/models';
 
@@ -7,8 +8,9 @@ import { PriceCoordinates, BitcoinPrice } from 'src/models';
   templateUrl: './bitcoin-stats.component.html',
   styleUrls: ['./bitcoin-stats.component.css']
 })
-export class BitcoinStatsComponent implements OnInit {
+export class BitcoinStatsComponent implements OnInit, OnDestroy {
   bitcoinStats: BitcoinPrice = new BitcoinPrice();
+  bitcoinStatsSub: Subscription;
   prices: number[];
   dates: string[];
   options: any;
@@ -20,8 +22,12 @@ export class BitcoinStatsComponent implements OnInit {
     this.getYearlyBitcoinPrice();
   }
 
+  ngOnDestroy() {
+    this.bitcoinStatsSub.unsubscribe();
+  }
+
   public getYearlyBitcoinPrice() {
-    this.cryptoService.getBitcoinPriceStats().subscribe((data: BitcoinPrice) => {
+    this.bitcoinStatsSub = this.cryptoService.getBitcoinPriceStats().subscribe((data: BitcoinPrice) => {
       this.bitcoinStats = data;
       this.prices = this.convertPrices();
       this.dates = this.convertDates();
