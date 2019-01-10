@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CryptoService } from 'src/services/crypto.service';
-import { CryptoCurrency, sortValues } from 'src/models';
+import { CryptoCurrency, SortValue } from 'src/models';
+import { sortValue } from 'src/models/datasets/sort-value.dataset';
 
 @Component({
     selector: 'app-crypto-table',
@@ -12,7 +13,7 @@ export class CryptoTableComponent implements OnInit, OnDestroy {
     public top100Cryptos: CryptoCurrency[];
     filteredCryptos: CryptoCurrency[];
     priceUnit = 'USD';
-    public sortValues = sortValues;
+    public sortValues: SortValue = sortValue;
     top100CryptosSub: Subscription;
 
     constructor(public cryptoService: CryptoService) {}
@@ -40,8 +41,8 @@ export class CryptoTableComponent implements OnInit, OnDestroy {
             this.filteredCryptos = this.top100Cryptos;
         });
     }
-    sortString(sortValue: boolean, key?: string): void {
-        if (sortValue) {
+    sortString(sortTemplate: boolean, key?: string): void {
+        if (sortTemplate) {
             this.top100Cryptos = this.top100Cryptos.sort((a, b) => {
                 const nameA = a.name.toUpperCase();
                 const nameB = b.name.toUpperCase();
@@ -65,8 +66,8 @@ export class CryptoTableComponent implements OnInit, OnDestroy {
             });
         }
     }
-    public sortNumeric(sortValue: string, key: string) {
-        if (sortValue) {
+    public sortNumeric(sortTemplate: string, key: string) {
+        if (sortTemplate) {
             this.top100Cryptos = this.top100Cryptos.sort((a: CryptoCurrency, b: CryptoCurrency) => {
                 return a[key] - b[key];
             });
