@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CryptoService } from 'src/services/crypto.service';
-import { CryptoCurrency } from 'src/models';
+import { CryptoCurrency, sortValues } from 'src/models';
 
 @Component({
     selector: 'app-crypto-table',
@@ -11,8 +11,7 @@ export class CryptoTableComponent {
     public top100Cryptos: CryptoCurrency[];
     filteredCryptos: CryptoCurrency[];
     priceUnit = 'USD';
-    public sortValues: any = { rank: false, market_cap_usd: true, available_supply: false,
-                               percent_change_24h: false, price_usd: false, price_btc: false, name: false};
+    public sortValues: any = sortValues;
     constructor(public cryptoService: CryptoService) {
         this.getTop100Cryptos();
     }
