@@ -23,4 +23,18 @@ describe('CryptoTableComponent', () => {
         expect(app).toBeTruthy();
     });
 
+    it('should return supported currency USD', () => {
+        const fixture = TestBed.createComponent(CryptoTableComponent);
+        const app = fixture.debugElement.componentInstance;
+        app.listenPriceUnit('USD');
+        expect(app.priceUnit).toContain('USD');
+    });
+
+    it('should return supported currency BTC', () => {
+        const fixture = TestBed.createComponent(CryptoTableComponent);
+        const app = fixture.debugElement.componentInstance;
+        app.listenPriceUnit('BTC');
+        expect(app.priceUnit).toContain('BTC');
+    });
+
 });
