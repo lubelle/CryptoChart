@@ -1,12 +1,14 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 
 import { CryptoCurrency } from 'src/models';
 import { CryptoFilterComponent } from './crypto-filter.component';
 import { CryptoService } from 'src/services/crypto.service';
 
 describe('CryptoFilterComponent', () => {
+    let fixture: ComponentFixture<CryptoFilterComponent>;
+    let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -21,95 +23,84 @@ describe('CryptoFilterComponent', () => {
           ],
           schemas: [NO_ERRORS_SCHEMA] // ignore the routeLink error in this case
         }).compileComponents();
+
+        fixture = TestBed.createComponent(CryptoFilterComponent);
+        component = fixture.debugElement.componentInstance;
     }));
 
-    it('should create the app', async(() => {
-        const fixture = TestBed.createComponent(CryptoFilterComponent);
-        const app = fixture.debugElement.componentInstance;
-
-        expect(app).toBeTruthy();   // the opposite of null or undefined
+    it('should create the component', async(() => {
+        expect(component).toBeTruthy();   // the opposite of null or undefined
     }));
 
     it('default properties', async(() => {
-        const fixture = TestBed.createComponent(CryptoFilterComponent);
-        const app = fixture.debugElement.componentInstance;
-
-        expect(app.filteredCryptos.length).toBe(0);
-        expect(typeof app.filteredCryptos).toBe('object');
-        expect(Array.isArray(app.filteredCryptos)).toBe(true);
-        expect(app.percentChange).toBe('All');
-        expect(app.showNumberOfCryptos).toBe(100);
-        expect(app.priceUnit).toBe('USD');
+        expect(component.filteredCryptos.length).toBe(0);
+        expect(typeof component.filteredCryptos).toBe('object');
+        expect(Array.isArray(component.filteredCryptos)).toBe(true);
+        expect(component.percentChange).toBe('All');
+        expect(component.showNumberOfCryptos).toBe(100);
+        expect(component.priceUnit).toBe('USD');
     }));
 
     it('limit total cryptos', async(() => {
       // arrange
-      const fixture = TestBed.createComponent(CryptoFilterComponent);
-      const app = fixture.debugElement.componentInstance;
-      app.filteredCryptos = Array(100).fill(new CryptoCurrency());
-      app.showNumberOfCryptos = 25;
+      component.filteredCryptos = Array(100).fill(new CryptoCurrency());
+      component.showNumberOfCryptos = 25;
 
       // act
-      app.showOnlyFilter();
+      component.showOnlyFilter();
 
       // assert
-      expect(typeof app.filteredCryptos).toBe('object');
-      expect(Array.isArray(app.filteredCryptos)).toBe(true);
-      expect(app.filteredCryptos.length).toBe(25);
+      expect(typeof component.filteredCryptos).toBe('object');
+      expect(Array.isArray(component.filteredCryptos)).toBe(true);
+      expect(component.filteredCryptos.length).toBe(25);
 
     }));
 
     it('retruns all cryptos', async(() => {
       // arrange
-      const fixture = TestBed.createComponent(CryptoFilterComponent);
-      const app = fixture.debugElement.componentInstance;
-      app.cryptos = Array(100).fill(new CryptoCurrency());
+      component.cryptos = Array(100).fill(new CryptoCurrency());
 
       // act
-      app.percentChangeFilter();
+      component.percentChangeFilter();
 
       // assert
-      expect(app.filteredCryptos[0] instanceof CryptoCurrency);
-      expect(app.filteredCryptos.length).toBe(100);
+      expect(component.filteredCryptos[0] instanceof CryptoCurrency);
+      expect(component.filteredCryptos.length).toBe(100);
     }));
 
     it('returns positive 24h growth cryptos', async(() => {
       // arrange
-      const fixture = TestBed.createComponent(CryptoFilterComponent);
-      const app = fixture.debugElement.componentInstance;
-      app.cryptos = [
+      component.cryptos = [
         new CryptoCurrency({percent_change_24h: -1}),
         new CryptoCurrency({percent_change_24h: 6}),
         new CryptoCurrency({percent_change_24h: 5})
       ];
-      app.percentChange = 'Positive';
+      component.percentChange = 'Positive';
 
       // act
-      app.percentChangeFilter();
+      component.percentChangeFilter();
 
       // assert
-      expect(app.filteredCryptos[0] instanceof CryptoCurrency);
-      expect(app.filteredCryptos.length).toBe(2);
+      expect(component.filteredCryptos[0] instanceof CryptoCurrency);
+      expect(component.filteredCryptos.length).toBe(2);
 
     }));
 
     it('returns negative 24h growth cryptos', async(() => {
       // arrange
-      const fixture = TestBed.createComponent(CryptoFilterComponent);
-      const app = fixture.debugElement.componentInstance;
-      app.cryptos = [
+      component.cryptos = [
         new CryptoCurrency({percent_change_24h: -1}),
         new CryptoCurrency({percent_change_24h: 6}),
         new CryptoCurrency({percent_change_24h: 5})
       ];
-      app.percentChange = 'Negative';
+      component.percentChange = 'Negative';
 
       // act
-      app.percentChangeFilter();
+      component.percentChangeFilter();
 
       // assert
-      expect(app.filteredCryptos[0] instanceof CryptoCurrency);
-      expect(app.filteredCryptos.length).toBe(1);
+      expect(component.filteredCryptos[0] instanceof CryptoCurrency);
+      expect(component.filteredCryptos.length).toBe(1);
 
     }));
 });
