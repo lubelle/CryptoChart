@@ -103,4 +103,22 @@ describe('CryptoFilterComponent', () => {
       expect(component.filteredCryptos.length).toBe(1);
 
     }));
+
+    it('should raise filteredCryptosEvent when filterEvented', () => {
+      let filteredCryptos = null;
+      component.filteredCryptosEvent.subscribe(cryptos => filteredCryptos = cryptos);
+
+      component.filterEvent();
+
+      expect(component.filteredCryptos).not.toBeNull();
+    });
+
+    it('should raise priceUnitEvent when priceEvented', () => {
+      let priceUnit = '';
+      component.priceUnitEvent.subscribe(unit => priceUnit = unit);
+
+      component.priceEvent();
+
+      expect(priceUnit).toBeTruthy();
+    });
 });
